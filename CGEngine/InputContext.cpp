@@ -25,9 +25,19 @@ void InputContext::Update() {
         m_CurrentMouseState[button] = glfwGetMouseButton(m_Window, button) == GLFW_PRESS;
     }
 
-    // Get mouse position
+    SetMousePosition();
+}
+
+void InputContext::SetMousePosition() {
     double xpos, ypos;
     glfwGetCursorPos(m_Window, &xpos, &ypos);
+
+    int width, height;
+    glfwGetWindowSize(m_Window, &width, &height);
+
+    xpos -= width / 2.0;
+    ypos = height / 2.0 - ypos; // Invert y and center
+
     m_MousePosition = glm::vec2(xpos, ypos);
 }
 

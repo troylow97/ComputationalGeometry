@@ -59,14 +59,11 @@ void Scene::RenderPolygonPointsOnScene() {
 	{
 		const GLfloat pointToRender[] = { static_cast<GLfloat>(verticesToRender[i].x), static_cast<GLfloat>(verticesToRender[i].y)};
 
-		if (std::find(pointsInConvexHull.begin(), pointsInConvexHull.end(), verticesToRender[i]) != pointsInConvexHull.end() && m_RenderConvexHull)
-		{
+		if (std::find(pointsInConvexHull.begin(), pointsInConvexHull.end(), verticesToRender[i]) != pointsInConvexHull.end() && m_RenderConvexHull) {
 			glPointSize(30);
 			glColor3f(1, 1, 1);
 		}
-
-		else
-		{
+		else {
 			glPointSize(25);
 			glColor3f(1, 0, 0);
 		}

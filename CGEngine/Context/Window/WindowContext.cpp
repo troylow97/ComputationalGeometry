@@ -57,7 +57,7 @@ bool WindowContext::ShouldWindowClose() const {
 	return glfwWindowShouldClose(m_WindowPtr);
 }
 
-void WindowContext::updateViewportSize() const {
+void WindowContext::UpdateViewportSize() const {
 	int width, height;
 	glfwGetWindowSize(m_WindowPtr, &width, &height);
 
@@ -71,6 +71,12 @@ void WindowContext::updateViewportSize() const {
 	glOrtho(static_cast<GLdouble>(-width) / 2, static_cast<GLdouble>(width) / 2, static_cast<GLdouble>(-height) / 2, static_cast<GLdouble>(height) / 2, 0, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+}
+
+glm::vec2 WindowContext::GetWindowSize() const {
+	int width, height;
+	glfwGetWindowSize(m_WindowPtr, &width, &height);
+	return glm::vec2(width, height);
 }
 
 void WindowContext::SwapBuffers() const {

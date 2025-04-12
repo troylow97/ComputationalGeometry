@@ -21,4 +21,5 @@ private:
     glm::vec2 m_MousePosition{};
     std::unordered_map<int, bool> m_CurrentMouseState;
     std::unordered_map<int, bool> m_PreviousMouseState;
+    void SetMousePosition();
 };

@@ -13,7 +13,9 @@ public:
 
 	bool ShouldWindowClose() const;
 
-	void updateViewportSize() const;
+	void UpdateViewportSize() const;
+
+	glm::vec2 GetWindowSize() const;
 
 	// Swaps the front and back buffers of the Window
 	void SwapBuffers() const;

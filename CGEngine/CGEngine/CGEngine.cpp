@@ -15,7 +15,7 @@ void CGEngine::Run()
 	while (!windowContext.ShouldWindowClose()) {
 		graphicsContext.ClearBuffer();
 
-		windowContext.updateViewportSize();
+		windowContext.UpdateViewportSize();
 
 		const auto scenePtr = sceneContext.GetActiveScene();
 
