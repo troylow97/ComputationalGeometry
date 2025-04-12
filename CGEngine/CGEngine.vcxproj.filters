@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Glad">
+      <UniqueIdentifier>{8a16e27b-58d2-4550-bcc7-056b7cae4add}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Messages">
+      <UniqueIdentifier>{3d2d0049-b49e-4b16-b49c-2a69cce784c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Context">
+      <UniqueIdentifier>{eb0bf372-ec62-41e9-a15a-80c5f0e1d4f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CGEngine">
+      <UniqueIdentifier>{a356a0b3-e9df-4ad8-b712-4ae4297fc2cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Context\Settings">
+      <UniqueIdentifier>{d1f49f35-15d7-49be-b7fe-a9a61609c843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Context\Window">
+      <UniqueIdentifier>{0573f246-a1c4-4eec-afac-f7299029b9ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Mathf">
+      <UniqueIdentifier>{64cc9424-5761-4445-af62-d6655b4fe015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Context\Graphics">
+      <UniqueIdentifier>{3d268c96-9c54-4b0e-8027-94443e203a4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Context\Scene">
+      <UniqueIdentifier>{d3a895cc-0f05-4ac7-95c3-7210d83cf767}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Context\Editor">
+      <UniqueIdentifier>{e86b2bb5-15c0-4938-bf6e-db8e97f890a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Shapes">
+      <UniqueIdentifier>{cefda8fa-6d93-4b50-906f-911a54bf63d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Algorithms">
+      <UniqueIdentifier>{baf78efe-d775-4ea6-b944-ec8566047b03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Context\Input">
+      <UniqueIdentifier>{e281269f-fe05-497e-89bf-aae21943262a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Glad\glad.c">
+      <Filter>Source Files\Glad</Filter>
+    </ClCompile>
+    <ClCompile Include="Context\ContextManager.cpp">
+      <Filter>Source Files\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="CGEngine\CGEngine.cpp">
+      <Filter>Source Files\CGEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Context\Window\WindowContext.cpp">
+      <Filter>Source Files\Context\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Mathf\Mathf.cpp">
+      <Filter>Source Files\Mathf</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Context\Graphics\GraphicsContext.cpp">
+      <Filter>Source Files\Context\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Context\Scene\Scene.cpp">
+      <Filter>Source Files\Context\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Context\Scene\SceneContext.cpp">
+      <Filter>Source Files\Context\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Context\Editor\EditorContext.cpp">
+      <Filter>Source Files\Context\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Shapes\PointHelper.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Shapes\Polygon.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Algorithms\Algorithms.cpp">
+      <Filter>Source Files\Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="InputContext.cpp">
+      <Filter>Source Files\Context\Input</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Messages\messages.hpp">
+      <Filter>Source Files\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Context\ContextManager.h">
+      <Filter>Source Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="CGEngine\CGEngine.h">
+      <Filter>Source Files\CGEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Context\Window\WindowContext.h">
+      <Filter>Source Files\Context\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Context\Settings\ContextSettings.h">
+      <Filter>Source Files\Context\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Mathf\Mathf.h">
+      <Filter>Source Files\Mathf</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Context\Graphics\GraphicsContext.h">
+      <Filter>Source Files\Context\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Context\Scene\Scene.h">
+      <Filter>Source Files\Context\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Context\Scene\SceneContext.h">
+      <Filter>Source Files\Context\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Context\Editor\EditorContext.h">
+      <Filter>Source Files\Context\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes\PointHelper.h">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes\Polygon.h">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\Algorithms.h">
+      <Filter>Source Files\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="InputContext.h">
+      <Filter>Source Files\Context\Input</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
