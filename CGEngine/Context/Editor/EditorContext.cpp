@@ -137,10 +137,16 @@ void EditorContext::ShowConvexHullMenu() {
 
 	//Add Point Button
 	if (ImGui::Button("Add Point")) {
+		scenePtr->m_LineIntersections.clear();
+		scenePtr->m_LineSweep_Q.clear();
+		scenePtr->m_LineSweep_T.clear();
 		scenePtr->GetShapePolygon().AddVertex({x, y});
 	}
 
 	if (ImGui::Button("Add Point Using Mouse Coordinate")) {
+		scenePtr->m_LineIntersections.clear();
+		scenePtr->m_LineSweep_Q.clear();
+		scenePtr->m_LineSweep_T.clear();
 		AddPointUsingMouseToggled = true;
 	}
 
@@ -217,8 +223,18 @@ void EditorContext::ShowPlaneSweepMenu() {
 		scenePtr->m_LineIntersections.clear();
 		scenePtr->m_LineSweep_Q.clear();
 		scenePtr->m_LineSweep_T.clear();
+		scenePtr->GetShapePolygon().clearVertices();
+		scenePtr->GetConvexHull().clearVertices();
 
 		scenePtr->m_LineSegments.push_back({ { x1,y1 }, { x2,y2 } });
+	}
+
+	if (ImGui::Button("Add Line Segments Using Mouse Click"))
+	{
+		scenePtr->m_LineIntersections.clear();
+		scenePtr->m_LineSweep_Q.clear();
+		scenePtr->m_LineSweep_T.clear();
+		AddLineSegmentUsingMouseToggled = true;
 	}
 
 	ImGui::Separator();
@@ -317,9 +333,24 @@ void EditorContext::ShowMainMenu() {
 }
 
 void EditorContext::HandleInput(const InputContext& inputContext, std::shared_ptr<Scene> scenePtr) {
-	if (inputContext.WasMouseClicked(GLFW_MOUSE_BUTTON_LEFT) && AddPointUsingMouseToggled) {
-		glm::vec2 mousePos = inputContext.GetMousePosition();
-		scenePtr->GetShapePolygon().AddVertex({ mousePos.x, mousePos.y });
-		AddPointUsingMouseToggled = false;
+	if (inputContext.WasMouseClicked(GLFW_MOUSE_BUTTON_LEFT)) {
+
+		if (AddPointUsingMouseToggled) {
+			glm::vec2 mousePos = inputContext.GetMousePosition();
+			scenePtr->GetShapePolygon().AddVertex({ mousePos.x, mousePos.y });
+			AddPointUsingMouseToggled = false;
+		}
+
+		if (AddLineSegmentUsingMouseToggled) {
+			glm::vec2 mousePos = inputContext.GetMousePosition();
+			if (AddLineSegmentUsingMouseVertexList.size() < 2) {
+				AddLineSegmentUsingMouseVertexList.push_back({ mousePos.x, mousePos.y });
+			}
+			else {
+				scenePtr->m_LineSegments.push_back({ AddLineSegmentUsingMouseVertexList[0], AddLineSegmentUsingMouseVertexList[1] });
+				AddLineSegmentUsingMouseVertexList.clear();
+				AddLineSegmentUsingMouseToggled = false;
+			}
+		}
 	}
 }

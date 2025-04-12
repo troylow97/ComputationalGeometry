@@ -62,8 +62,7 @@ namespace Shape {
 		return result;
 	}
 
-	glm::vec2 Polygon::getCenterPoint()
-	{
+	glm::vec2 Polygon::getCenterPoint() {
 		float sumOfAllVertex_X = 0.0f;
 		float sumOfAllVertex_Y = 0.0f;
 		for (auto& vertex : m_Vertices)
@@ -74,8 +73,26 @@ namespace Shape {
 		return glm::vec2{ sumOfAllVertex_X / m_Vertices.size(), sumOfAllVertex_Y / m_Vertices.size() };
 	}
 
-	void Polygon::clearVertices()
-	{
+	std::vector<Shape::Line> Shape::Polygon::GetEdges(bool closeLoop) const {
+		std::vector<Shape::Line> edges;
+
+		if (m_Vertices.size() < 2)
+			return edges;
+
+		for (size_t i = 0; i < m_Vertices.size() - 1; ++i) {
+			edges.emplace_back(m_Vertices[i], m_Vertices[i + 1]);
+		}
+
+		if (closeLoop) {
+			edges.emplace_back(m_Vertices.back(), m_Vertices.front());
+		}
+
+		return edges;
+	}
+
+
+
+	void Polygon::clearVertices() {
 		m_Vertices.clear();
 	}
 
@@ -100,8 +117,7 @@ namespace Shape {
 		}
 	}
 
-	void Polygon::printListOfVertices()
-	{
+	void Polygon::printListOfVertices() {
 		if (m_Vertices.empty())
 			std::cout << "There is no polygon" << std::endl;
 		else

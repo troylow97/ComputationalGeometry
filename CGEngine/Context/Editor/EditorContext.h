@@ -76,6 +76,8 @@ private:
 	void ShowConvexHullMenu();
 
 	bool AddPointUsingMouseToggled;
+	bool AddLineSegmentUsingMouseToggled;
+	std::vector<glm::vec2> AddLineSegmentUsingMouseVertexList;
 	
 	float x;
 	float y;

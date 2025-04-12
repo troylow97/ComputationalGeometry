@@ -1,6 +1,8 @@
 #pragma once
 
-namespace  Shape {
+namespace Shape {
+	class Line;
+
 	class Polygon
 	{
 	private:
@@ -24,6 +26,7 @@ namespace  Shape {
 		std::vector<glm::vec2> getVertexList();
 		std::vector<glm::ivec2> getVertexListForRender();
 		glm::vec2 getCenterPoint();
+		std::vector<Shape::Line> GetEdges(bool closeLoop = true) const;
 		void clearVertices();
 
 		//Operators
