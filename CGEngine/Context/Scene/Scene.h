@@ -57,7 +57,7 @@ private:
 	bool m_RenderConvexHull = true;
 	bool m_ConvexHullCompleted = false;
 	bool m_ConvexHullSimulationCompleted = false;
-	int m_SimulationWait = 500;
+	int m_SimulationWait = 200;
 	const int MAX_CONVEX_HULL_SIMULATION_WAIT = 10000;
 
 	bool m_LineSweepSimulationCompleted = false;

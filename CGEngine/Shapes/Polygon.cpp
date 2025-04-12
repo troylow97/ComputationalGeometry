@@ -32,9 +32,9 @@ namespace Shape {
 		m_Vertices.push_back(new_vertex);
 	}
 
-	void Polygon::RemoveVertex(glm::vec2 vertex) {
+	void Polygon::RemoveVertex(glm::vec2 vertex, float precision) {
 		m_Vertices.erase(std::remove_if(m_Vertices.begin(), m_Vertices.end(),
-			[&](glm::vec2 vertexCompare) { return vertex == vertexCompare; }), m_Vertices.end());
+			[&](glm::vec2 vertexCompare) { return Mathf::SameFloat(vertex.x, vertexCompare.x, precision) && Mathf::SameFloat(vertex.y, vertexCompare.y, precision); }), m_Vertices.end());
 	}
 
 	void Polygon::RemoveVertex(int index) {

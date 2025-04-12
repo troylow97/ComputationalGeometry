@@ -41,9 +41,12 @@ public:
     \param	max: maximum number in the range
   */
   /**************************************************************************/
-  static float RandomFloatRange(float min, float max) {
-    return (min + (RandomFloat() * (max - min)));
+  static float RandomFloatRange(float min, float max, int decimalPlaces = 2) {
+      float value = min + (RandomFloat() * (max - min));
+      float scale = static_cast<float>(std::pow(10.0, decimalPlaces));
+      return std::round(value * scale) / scale;
   }
+
 
 private:
   //Mersenne Twister 19937 generator

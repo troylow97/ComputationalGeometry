@@ -5,6 +5,7 @@
 #include <imgui_impl_glfw.h>
 #include "Algorithms/Algorithms.h"
 #include "Math/Random.h"
+#include "Shapes/PointHelper.h"
 
 EditorContext::EditorContext(ContextManager& ctxMgr) :
 	m_ContextManager{ ctxMgr },
@@ -16,7 +17,9 @@ EditorContext::EditorContext(ContextManager& ctxMgr) :
 	x2{ 0.0 },
 	y2{ 0.0 },
 	AddPointUsingMouseToggled{ false },
+	DeletePointUsingMouseToggled{ false },
 	AddLineSegmentUsingMouseToggled{ false },
+	DeleteLineSegmentUsingMouseToggled{ false },
 	AddLineSegmentUsingMouseVertexList{},
 	m_RandomAmountForConvexHull{ 5 },
 	m_RandomAmountForLineSegment{ 5 }
@@ -165,6 +168,10 @@ void EditorContext::ShowConvexHullMenu() {
 		scenePtr->GetShapePolygon().RemoveVertex({ x, y });
 	}
 
+	if (ImGui::Button("Delete Point Using Mouse Click")) {
+		DeletePointUsingMouseToggled = true;
+	}
+
 	ImGui::Separator();
 
 	// Clear Point Button
@@ -261,6 +268,10 @@ void EditorContext::ShowPlaneSweepMenu() {
 		//scenePtr->m_LineIntersections = LineSweepAlgorithm(scenePtr->m_LineSegments);
 	}
 
+	if (ImGui::Button("Delete Line Segment Using Mouse Click")) {
+		DeleteLineSegmentUsingMouseToggled = true;
+	}
+
 	ImGui::Separator();
 
 	if (ImGui::Button("Clear all Line Segments"))
@@ -344,15 +355,19 @@ void EditorContext::ShowMainMenu() {
 
 void EditorContext::HandleInput(const InputContext& inputContext, std::shared_ptr<Scene> scenePtr) {
 	if (inputContext.WasMouseClicked(GLFW_MOUSE_BUTTON_LEFT)) {
+		glm::vec2 mousePos = inputContext.GetMousePosition();
 
 		if (AddPointUsingMouseToggled) {
-			glm::vec2 mousePos = inputContext.GetMousePosition();
 			scenePtr->GetShapePolygon().AddVertex({ mousePos.x, mousePos.y });
 			AddPointUsingMouseToggled = false;
 		}
 
+		if (DeletePointUsingMouseToggled) {
+			scenePtr->GetShapePolygon().RemoveVertex({ mousePos.x, mousePos.y }, 10.0f);
+			DeletePointUsingMouseToggled = false;
+		}
+
 		if (AddLineSegmentUsingMouseToggled) {
-			glm::vec2 mousePos = inputContext.GetMousePosition();
 			if (AddLineSegmentUsingMouseVertexList.size() < 2) {
 				AddLineSegmentUsingMouseVertexList.push_back({ mousePos.x, mousePos.y });
 			}
@@ -361,6 +376,19 @@ void EditorContext::HandleInput(const InputContext& inputContext, std::shared_pt
 				AddLineSegmentUsingMouseVertexList.clear();
 				AddLineSegmentUsingMouseToggled = false;
 			}
+		}
+
+		if (DeleteLineSegmentUsingMouseToggled) {
+			for (auto it = scenePtr->m_LineSegments.begin(); it != scenePtr->m_LineSegments.end(); ) {
+				if (IsPointNearLineSegment(it->GetVerticesStart(), it->GetVerticesEnd(), mousePos, 5.0f)) {
+					it = scenePtr->m_LineSegments.erase(it);
+				}
+				else {
+					++it;
+				}
+			}
+
+			DeleteLineSegmentUsingMouseToggled = false;
 		}
 	}
 }

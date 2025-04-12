@@ -18,7 +18,7 @@ namespace Shape {
 
 		//Utils
 		void AddVertex(glm::vec2 new_vertex);
-		void RemoveVertex(glm::vec2 vertex);
+		void RemoveVertex(glm::vec2 vertex, float precision = Mathf::PRECISION);
 		void RemoveVertex(int index);
 
 		//GetterSetter

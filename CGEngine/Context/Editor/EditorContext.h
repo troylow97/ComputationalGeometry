@@ -81,7 +81,9 @@ private:
 	void ShowCoordinatesBesideMouse();
 
 	bool AddPointUsingMouseToggled;
+	bool DeletePointUsingMouseToggled;
 	bool AddLineSegmentUsingMouseToggled;
+	bool DeleteLineSegmentUsingMouseToggled;
 	std::vector<glm::vec2> AddLineSegmentUsingMouseVertexList;
 	int m_RandomAmountForConvexHull;
 	int m_RandomAmountForLineSegment;
