@@ -48,6 +48,8 @@ public:
 	// Is the Game window visible?
 	bool IsGameViewportVisible() const { return m_EditorGameVisible; }
 
+	void HandleInput(const InputContext&, std::shared_ptr<Scene>);
+
 private:
 	// Context References
 	ContextManager& m_ContextManager;
@@ -72,6 +74,8 @@ private:
 	void ShowMainMenu();
 	void ShowPlaneSweepMenu();
 	void ShowConvexHullMenu();
+
+	bool AddPointUsingMouseToggled;
 	
 	float x;
 	float y;

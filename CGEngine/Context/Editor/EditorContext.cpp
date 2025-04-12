@@ -13,9 +13,9 @@ EditorContext::EditorContext(ContextManager& ctxMgr) :
 	x1{ 0.0 },
 	y1{ 0.0 },
 	x2{ 0.0 },
-	y2{ 0.0 }
-{
-}
+	y2{ 0.0 },
+	AddPointUsingMouseToggled{ false }
+{}
 
 EditorContext::~EditorContext() {
 	ImGui_ImplOpenGL3_Shutdown();
@@ -138,6 +138,10 @@ void EditorContext::ShowConvexHullMenu() {
 	//Add Point Button
 	if (ImGui::Button("Add Point")) {
 		scenePtr->GetShapePolygon().AddVertex({x, y});
+	}
+
+	if (ImGui::Button("Add Point Using Mouse Coordinate")) {
+		AddPointUsingMouseToggled = true;
 	}
 
 	ImGui::Separator();
@@ -309,5 +313,13 @@ void EditorContext::ShowMainMenu() {
 		}
 
 		ImGui::EndMainMenuBar();
+	}
+}
+
+void EditorContext::HandleInput(const InputContext& inputContext, std::shared_ptr<Scene> scenePtr) {
+	if (inputContext.WasMouseClicked(GLFW_MOUSE_BUTTON_LEFT) && AddPointUsingMouseToggled) {
+		glm::vec2 mousePos = inputContext.GetMousePosition();
+		scenePtr->GetShapePolygon().AddVertex({ mousePos.x, mousePos.y });
+		AddPointUsingMouseToggled = false;
 	}
 }

@@ -21,10 +21,7 @@ void CGEngine::Run()
 
 		inputContext.Update();
 
-		if (inputContext.WasMouseClicked(GLFW_MOUSE_BUTTON_LEFT)) {
-			glm::vec2 mousePos = inputContext.GetMousePosition();
-			std::cout << "Mouse clicked at: " << mousePos.x << ", " << mousePos.y << std::endl;
-		}
+		editorContext.HandleInput(inputContext, scenePtr);
 
 		// Start of Editor Frame
 		editorContext.BeginEditorFrame();
