@@ -10,6 +10,8 @@ int main()
 {
 	CGEngine engine;
 
+	engine.Init();
+
 	engine.Run();
 
 	return 0;

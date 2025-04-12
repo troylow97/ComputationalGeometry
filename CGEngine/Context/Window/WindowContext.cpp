@@ -79,6 +79,26 @@ glm::vec2 WindowContext::GetWindowSize() const {
 	return glm::vec2(width, height);
 }
 
+glm::vec2 WindowContext::GetTopLeftPositionOfWindow() const {
+	glm::vec2 windowSize = GetWindowSize();
+	return glm::vec2(-windowSize.x / 2, windowSize.y / 2);
+}
+
+glm::vec2 WindowContext::GetTopRightPositionOfWindow() const {
+	glm::vec2 windowSize = GetWindowSize();
+	return glm::vec2(windowSize.x / 2, windowSize.y / 2);
+}
+
+glm::vec2 WindowContext::GetBottomLeftPositionOfWindow() const {
+	glm::vec2 windowSize = GetWindowSize();
+	return glm::vec2(-windowSize.x / 2, -windowSize.y / 2);
+}
+
+glm::vec2 WindowContext::GetBottomRightPositionOfWindow() const {
+	glm::vec2 windowSize = GetWindowSize();
+	return glm::vec2(windowSize.x / 2, -windowSize.y / 2);
+}
+
 void WindowContext::SwapBuffers() const {
 	glfwSwapBuffers(m_WindowPtr);
 }

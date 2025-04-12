@@ -17,6 +17,11 @@ public:
 
 	glm::vec2 GetWindowSize() const;
 
+	glm::vec2 GetTopLeftPositionOfWindow() const;
+	glm::vec2 GetTopRightPositionOfWindow() const;
+	glm::vec2 GetBottomLeftPositionOfWindow() const;
+	glm::vec2 GetBottomRightPositionOfWindow() const;
+
 	// Swaps the front and back buffers of the Window
 	void SwapBuffers() const;
 

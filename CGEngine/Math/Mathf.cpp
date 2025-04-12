@@ -169,6 +169,15 @@ int Mathf::ccw(glm::vec2 a, glm::vec2 b, glm::vec2 c) {
 	return 0;
 }
 
+bool Mathf::AreLinesCollinear(const glm::vec2& A, const glm::vec2& B,
+	const glm::vec2& C, const glm::vec2& D) {
+	glm::vec2 dir1 = B - A;
+	glm::vec2 dir2 = D - C;
+
+	float cross = dir1.x * dir2.y - dir1.y * dir2.x;
+	return std::abs(cross) < EPSILON;
+}
+
 bool Mathf::SameFloat(float a, float b, float precision) {
 	return fabs(a - b) < precision;
 }

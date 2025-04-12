@@ -4,6 +4,7 @@
 #include <ImCurveEdit.h>
 #include <imgui_impl_glfw.h>
 #include "Algorithms/Algorithms.h"
+#include "Math/Random.h"
 
 EditorContext::EditorContext(ContextManager& ctxMgr) :
 	m_ContextManager{ ctxMgr },
@@ -14,7 +15,11 @@ EditorContext::EditorContext(ContextManager& ctxMgr) :
 	y1{ 0.0 },
 	x2{ 0.0 },
 	y2{ 0.0 },
-	AddPointUsingMouseToggled{ false }
+	AddPointUsingMouseToggled{ false },
+	AddLineSegmentUsingMouseToggled{ false },
+	AddLineSegmentUsingMouseVertexList{},
+	m_RandomAmountForConvexHull{ 5 },
+	m_RandomAmountForLineSegment{ 5 }
 {}
 
 EditorContext::~EditorContext() {
@@ -63,6 +68,7 @@ void EditorContext::RenderWidgets() {
 	ImGuiWindowFlags window_flags = SetDockSpace();
 	ImGui::Begin("DockSpace", nullptr, window_flags);
 	ShowMainMenu();
+	ShowCoordinatesBesideMouse();
 	ImGui::End();
 }
 
@@ -143,12 +149,14 @@ void EditorContext::ShowConvexHullMenu() {
 		scenePtr->GetShapePolygon().AddVertex({x, y});
 	}
 
-	if (ImGui::Button("Add Point Using Mouse Coordinate")) {
+	if (ImGui::Button("Add Point Using Mouse Click")) {
 		scenePtr->m_LineIntersections.clear();
 		scenePtr->m_LineSweep_Q.clear();
 		scenePtr->m_LineSweep_T.clear();
 		AddPointUsingMouseToggled = true;
 	}
+
+	AddRandomPointsForConvexHull(scenePtr);
 
 	ImGui::Separator();
 
@@ -237,9 +245,11 @@ void EditorContext::ShowPlaneSweepMenu() {
 		AddLineSegmentUsingMouseToggled = true;
 	}
 
+	AddRandomPointsForLineSegment(scenePtr);
+
 	ImGui::Separator();
 
-	//Add Line Segment Button
+	//Delete Line Segment Button
 	if (ImGui::Button("Delete Line Segment"))
 	{
 		scenePtr->m_LineIntersections.clear();
@@ -353,4 +363,68 @@ void EditorContext::HandleInput(const InputContext& inputContext, std::shared_pt
 			}
 		}
 	}
+}
+
+void EditorContext::ShowCoordinatesBesideMouse() {
+	glm::vec2 mousePos = m_ContextManager.GetInputContext().GetMousePosition();
+	ImGui::SetNextWindowBgAlpha(0.3f);
+
+	ImGui::SetNextWindowPos(ImGui::GetMousePos(), ImGuiCond_Always, ImVec2(0, 1)); // anchor below the cursor
+	ImGui::Begin("MouseOverlay", nullptr,
+		ImGuiWindowFlags_NoTitleBar |
+		ImGuiWindowFlags_NoResize |
+		ImGuiWindowFlags_AlwaysAutoResize |
+		ImGuiWindowFlags_NoMove |
+		ImGuiWindowFlags_NoSavedSettings |
+		ImGuiWindowFlags_NoFocusOnAppearing |
+		ImGuiWindowFlags_NoNav);
+
+	ImGui::Text("(%.0f, %.0f)", mousePos.x, mousePos.y);
+	ImGui::End();
+}
+
+void EditorContext::AddRandomPointsForConvexHull(ScenePtr scenePtr) {
+	if (ImGui::Button("Add Random Points")) {
+		glm::vec2 windowSize = m_ContextManager.GetWindowContext().GetWindowSize();
+		windowSize.y -= 50;
+
+		for (int i = 0; i < m_RandomAmountForConvexHull; ++i) {
+			scenePtr->GetShapePolygon().AddVertex({ Random::RandomFloatRange(0 - windowSize.x / 2, windowSize.x / 2), Random::RandomFloatRange(0 - windowSize.y / 2, windowSize.y / 2) });
+		}
+	}
+	ImGui::SameLine();
+	ImGui::SetNextItemWidth(75);
+	ImGui::InputInt("", &m_RandomAmountForConvexHull);
+}
+
+void EditorContext::AddRandomPointsForLineSegment(ScenePtr scenePtr) {
+	if (ImGui::Button("Add Random Points")) {
+		glm::vec2 windowSize = m_ContextManager.GetWindowContext().GetWindowSize();
+		windowSize.y -= 50;
+		glm::vec2 ref1 = { 0, 0 };
+		glm::vec2 ref2 = { 1, 0 }; // horizontal reference
+
+		for (int i = 0; i < m_RandomAmountForLineSegment; ++i) {
+			while (true) {
+				float xPos1 = Random::RandomFloatRange(-windowSize.x / 2, windowSize.x / 2);
+				float yPos1 = Random::RandomFloatRange(-windowSize.y / 2, windowSize.y / 2);
+				float xPos2 = Random::RandomFloatRange(-windowSize.x / 2, windowSize.x / 2);
+				float yPos2 = Random::RandomFloatRange(-windowSize.y / 2, windowSize.y / 2);
+
+				// Skip if the two points are the same
+				if (xPos1 == xPos2 && yPos1 == yPos2) continue;
+
+				glm::vec2 a(xPos1, yPos1);
+				glm::vec2 b(xPos2, yPos2);
+
+				if (!Mathf::AreLinesCollinear(ref1, ref2, a, b)) {
+					scenePtr->m_LineSegments.emplace_back(a, b);
+					break;
+				}
+			}
+		}
+	}
+	ImGui::SameLine();
+	ImGui::SetNextItemWidth(75);
+	ImGui::InputInt("", &m_RandomAmountForLineSegment);
 }

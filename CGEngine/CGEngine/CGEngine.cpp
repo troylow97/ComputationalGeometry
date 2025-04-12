@@ -1,6 +1,11 @@
 #include "pch.h"
 #include <thread>
 #include "CGEngine.h"
+#include "Math/Random.h"
+
+void CGEngine::Init() {
+	Random::Init();
+}
 
 void CGEngine::Run()
 {
@@ -71,8 +76,6 @@ void CGEngine::Run()
 		//=====================================
 
 		windowContext.SwapBuffers();
-
-		// Poll pending window events
 		windowContext.PollEvents();
 	}
 }

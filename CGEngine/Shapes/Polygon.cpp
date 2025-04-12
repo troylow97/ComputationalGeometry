@@ -25,22 +25,19 @@ namespace Shape {
 
 	Polygon::~Polygon() {}
 
-	void Polygon::AddVertex(glm::vec2 new_vertex)
-	{
+	void Polygon::AddVertex(glm::vec2 new_vertex) {
 		if (std::find(m_Vertices.begin(), m_Vertices.end(), new_vertex) != m_Vertices.end())
 			return;
 
 		m_Vertices.push_back(new_vertex);
 	}
 
-	void Polygon::RemoveVertex(glm::vec2 vertex)
-	{
+	void Polygon::RemoveVertex(glm::vec2 vertex) {
 		m_Vertices.erase(std::remove_if(m_Vertices.begin(), m_Vertices.end(),
 			[&](glm::vec2 vertexCompare) { return vertex == vertexCompare; }), m_Vertices.end());
 	}
 
-	void Polygon::RemoveVertex(int index)
-	{
+	void Polygon::RemoveVertex(int index) {
 		m_Vertices.erase(m_Vertices.begin() + index);
 	}
 

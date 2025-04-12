@@ -10,6 +10,8 @@ public:
 
 	ContextManager& GetContextManager() { return m_ContextManager; }
 
+	void Init();
+
 	void Run();
 
 	void RunSimulation();

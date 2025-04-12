@@ -75,9 +75,16 @@ private:
 	void ShowPlaneSweepMenu();
 	void ShowConvexHullMenu();
 
+	void AddRandomPointsForConvexHull(ScenePtr);
+	void AddRandomPointsForLineSegment(ScenePtr);
+
+	void ShowCoordinatesBesideMouse();
+
 	bool AddPointUsingMouseToggled;
 	bool AddLineSegmentUsingMouseToggled;
 	std::vector<glm::vec2> AddLineSegmentUsingMouseVertexList;
+	int m_RandomAmountForConvexHull;
+	int m_RandomAmountForLineSegment;
 	
 	float x;
 	float y;

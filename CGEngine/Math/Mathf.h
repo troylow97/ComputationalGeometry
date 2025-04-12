@@ -72,4 +72,6 @@ namespace Mathf
 	bool isVectorApproximate(const glm::vec2& t1, const glm::vec2& t2, float precision = PRECISION);
 
 	bool isVectorApproximate(const glm::vec3& t1, const glm::vec3& t2, float precision = PRECISION);
+
+	bool AreLinesCollinear(const glm::vec2& A, const glm::vec2& B, const glm::vec2& C, const glm::vec2& D);
 };
