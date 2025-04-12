@@ -361,7 +361,8 @@ ImGui/Lib/*.lib
 *.sln.nvsettings
 
 *.idb
-*.exe
+x64/Debug/*.exe
+x64/Release/*.exe
 *.pdb
 
 # End of Whitelist
